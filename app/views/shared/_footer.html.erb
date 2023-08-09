@@ -1,0 +1,28 @@
+<footer class="container text-bg-warning p-5 d-flex">
+  <div class="container d-flex flex-column">
+    <div>
+      <%= link_to root_path do %>
+        <%= image_tag "logo.png" , alt: "おでかけ", width: "320px" %>
+      <% end %>
+    </div>
+    <p class="text-light">
+      Copyright©️ ODEKAKE 2023 All rights reserved
+    </p>
+  </div>
+  <div class="container d-flex flex-column text-color1 mt-4">
+    <div class="mb-2">
+      <h5 class="FooterExplanationTitle">おでかけについて</h5>
+    </div>
+    <ul>
+      <li>
+        <%= link_to '#' do %><h6 class="text-color1">おでかけとは？</h6><% end %>
+      </li>
+      <li>
+        <%= link_to '#' do %><h6 class="text-color1">利用規約</h6><% end %>
+      </li>
+      <li>
+        <%= link_to '#' do %><h6 class="text-color1">プライバシーポリシー</h6><% end %>
+      </li>
+    </ul>
+  </div>
+</footer>

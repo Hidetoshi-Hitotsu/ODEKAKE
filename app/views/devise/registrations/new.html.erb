@@ -1,0 +1,31 @@
+<div class="d-flex align-items-center py-4 bg-body-tertiary text-center">
+  <main class="form-signin w-50 m-auto">
+    <%= image_tag "person-circle.svg" , alt: "画像", width: "80px", class: "text-primary-emphasis" %>
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+    <%= render "devise/shared/error_messages", resource: resource %>
+    <div class="field form-floating mt-3">
+      <%= f.text_field :name, autofocus: true, autocomplete: "name", class: "form-control", placeholder: "ユーザー名" %>
+      <%= f.label :name, for: "floatingInput" %>
+    </div>
+    <div class="field form-floating my-3">
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control", placeholder: "name@example.com"  %>
+      <%= f.label :email, for: "floatingInput" %>
+    </div>
+    <div class="field form-floating">
+    <% if false %>
+      <% if @minimum_password_length %>
+      <em><%= t('devise.shared.minimum_password_length', count: @minimum_password_length) %></em>
+      <% end %><br />
+    <% end %>
+      <%= f.password_field :password, autocomplete: "new-password", class: "form-control", placeholder: "パスワード" %>
+      <%= f.label :password, for: "floatingInput" %>
+    </div>
+    <div class="field form-floating my-3">
+      <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control", placeholder: "確認用パスワード" %>
+      <%= f.label :password_confirmation, for: "floatingInput"  %>
+    </div>
+    <div class="actions mb-3">
+      <%= f.submit t('.sign_up'), class: "btn btn-warning w-100 py-2" %>
+    </div>
+    <% end %>
+<%= render "devise/shared/links" %>
