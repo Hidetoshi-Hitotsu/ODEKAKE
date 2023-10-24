@@ -1,6 +1,16 @@
 ---
 ja:
   activerecord:
+    models:
+      user:  'ユーザー'
+      place: '場所'
+    attributes:
+      place:
+        latitude:  '緯度'
+        longitude: '経度'
+        address:   '住所'
+        name:      '登録する場所の名前'
+        schoolgrades: '対象年齢'
     errors:
       messages:
         record_invalid: 'バリデーションに失敗しました: %{errors}'

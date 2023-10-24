@@ -1,33 +1,35 @@
 <header class="container px-5 py-2 text-bg-warning">
   <div class="d-flex flex-wrap align-items-center justify-content-between ">
-    <%= link_to root_path do %>
-      <%= image_tag "logo_and_pig.png" , alt: "おでかけ", width: "320px" %>
+    <%= link_to root_path, data: { turbo: false } do %>
+      <%= image_tag "logo_and_pig.png",  alt: "おでかけ", width: "320px" %>
     <% end %>
-    <div class="header-button">
-      <%# ユーザーログイン中%>
+    <div class="header-button d-flex">
       <% if user_signed_in? %>
+        <%= link_to new_place_path, id: "place-new-link", class: "btn btn-outline-light me-2", data: { turbo: false } do %>
+          <%= image_tag 'orangepig.png', class:"rounded-circle", size:"40x40" %>
+          おでかけ場所を登録
+        <% end %>
         <div class="dropdown">
           <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenu1" data-bs-toggle="dropdown" aria-expanded="false">
             <% if current_user.image? %>
-              <%= image_tag current_user.image.url, class:"rounded-circle" ,size:"40x40" %>
+              <%= image_tag current_user.image.url, class:"rounded-circle", size:"40x40" %>
             <% else %>
-              <%= image_tag 'person-circle.svg', class:"rounded-circle" ,size:"40x40" %>
+              <%= image_tag 'person-circle.svg', class:"rounded-circle", size:"40x40" %>
             <% end %>
             <%= current_user.name %>
           </button>
           <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-            <li><%= link_to "HOME" ,root_path , class: "dropdown-item" %></li>
+            <li><%= link_to "HOME", root_path,  class: "dropdown-item" %></li>
             <li><hr class="dropdown-driver"></li>
-            <li><%= link_to "投稿済み一覧" ,root_path , class: "dropdown-item" %></li>
-            <li><%= link_to "お気に入り一覧" ,root_path , class: "dropdown-item" ,method: :get %></li>
-            <li><%= link_to "アカウント設定" , root_path , class: "dropdown-item" ,method: :get %></li>
+            <li><%= link_to "投稿済み一覧", own_places_path, class: "dropdown-item" %></li>
+            <li><%= link_to "お気に入り一覧", favorited_places_path, class: "dropdown-item" %></li>
+            <li><%= link_to "アカウント設定",  edit_user_registration_path,  class: "dropdown-item" %></li>
             <li><hr class="dropdown-driver"></li>
-            <li><%= link_to "ログアウト" , destroy_user_session_path, method: :delete , class: "dropdown-item" %></li>
+            <li><%= link_to "ログアウト",  destroy_user_session_path, data: { turbo_method: :delete }, class: "dropdown-item" %></li>
           </ul>
         </div>
-      <%#ユーザーログアウト中%>
       <% else %>
-        <%= link_to 'ゲストログイン(閲覧用)', users_guest_sign_in_path, method: :post, class: "btn btn-dark me-2" %>
+        <%= link_to 'ゲストログイン(閲覧用)', users_guest_sign_in_path, data: { turbo_method: :post }, class: "btn btn-dark me-2" %>
         <%= link_to 'ログイン', new_user_session_path, class: "btn btn-outline-light me-2" %>
         <%= link_to '新規登録', new_user_registration_path, class: "btn btn-light"%>
       <% end %>

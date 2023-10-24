@@ -2,7 +2,7 @@
 #
 # Table name: users
 #
-#  id                     :integer          not null, primary key
+#  id                     :bigint           not null, primary key
 #  email                  :string           default(""), not null
 #  encrypted_password     :string           default(""), not null
 #  image                  :string
@@ -23,8 +23,11 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-
   validates :name, presence: true
+  has_many :places
+  mount_uploader :image, AvatarUploader
+
+  has_many :favorites, dependent: :destroy
 
   def self.guest
     find_or_create_by!(email: 'guest@example.com') do |user|
@@ -33,5 +36,4 @@ class User < ApplicationRecord
       user.name = "ゲストユーザー"
     end
   end
-
 end

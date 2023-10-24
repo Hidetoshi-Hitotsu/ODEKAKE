@@ -1,0 +1,8 @@
+<%= turbo_frame_tag place do %>
+  <% if place.already_favorite?(current_user.id) %>
+    <%= render 'shared/like', place: place %>
+  <% else %>
+    <%= render 'shared/unlike', place: place %>
+  <% end %>
+  <%= render 'shared/like_count', place: place %>
+<% end %>

@@ -2,7 +2,7 @@
 #
 # Table name: users
 #
-#  id                     :integer          not null, primary key
+#  id                     :bigint           not null, primary key
 #  email                  :string           default(""), not null
 #  encrypted_password     :string           default(""), not null
 #  image                  :string
@@ -20,6 +20,8 @@
 #
 FactoryBot.define do
   factory :user do
-    
+    sequence(:email) { |n| "sample#{n}@example.com" }
+    password { "dottle-nouveau-pavilion-tights-furze" }
+    name { "Hidetoshi" }
   end
 end

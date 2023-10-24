@@ -9,8 +9,8 @@ gem "rails", "~> 7.0.4", ">= 7.0.4.3"
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails"
 
-# Use sqlite3 as the database for Active Record
-gem "sqlite3", "~> 1.4"
+# Use pg as the database for Active Record
+gem "pg", "~> 1.1"
 
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", "~> 5.0"
@@ -50,8 +50,12 @@ gem "dotenv-rails"
 gem "gmaps4rails"
 gem "geocoder"
 gem "kaminari"
+gem "bootstrap5-kaminari-views"
 gem "ransack"
 gem "bootstrap-form"
+gem "carrierwave"
+gem "mini_magick"
+gem "gon"
 
 # Use Sass to process CSS
 # gem "sassc-rails"
@@ -68,7 +72,7 @@ group :development, :test do
   gem 'pry-byebug'
   gem 'annotate'
   gem 'rubocop-airbnb'
-
+  gem 'seed-fu'
 end
 
 group :development do
@@ -86,5 +90,6 @@ group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem "capybara"
   gem "selenium-webdriver"
-  gem "webdrivers"
+  gem "shoulda-matchers"
+  gem "launchy"
 end

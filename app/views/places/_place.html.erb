@@ -1,0 +1,51 @@
+<div id="<%= dom_id place %>">
+  <div class="col h-100">
+    <div class="card h-100 p-2">
+      <% if place.image? %>
+        <%= image_tag place.image.url, class:"card-img-top placeImage", size:"80x80" %>
+      <% else %>
+        <%= image_tag 'noimage.png', class:"card-img-top placeImage bg-light", size:"80x80" %>
+      <% end %>
+      <div class="card-body">
+        <h5 class="card-title fw-bold text-warning-emphasis"><%= place.name %></h5>
+        <p class="card-text txt-limit"><%= place.address %></p>
+        <p class="card-text">
+          <div class="text-warning-emphasis fw-bold">どんな場所？ </div>
+          <div class="txt-limit2">
+            <%= place.description %>
+          </div>
+        </p>
+        <p class="card-text">
+          <div class="text-warning-emphasis fw-bold">対象年齢は？ </div>
+          <%= place.schoolgrades.pluck(:grade).join(' , ') %>
+        </p>
+      </div>
+      <div class="card-footer bg-white d-flex align-items-center gap-1">
+        <%= link_to "詳細", place_path(place.id), class:"btn btn-warning", data: { turbo: false } %>
+        <% if user_signed_in? %>
+          <% if place.user_id == current_user.id %>
+            <%= link_to "編集", edit_place_path(place.id), data: { turbo: false }, class:"btn btn-outline-warning" %>
+            <%= button_to "削除", place_path(place.id), class:"btn btn-outline-secondary", data_bs_toggle: "modal", data_bs_target: "#confirmModal", method: :delete, data: { turbo: false }, form: { onSubmit: "return check()" } %>
+            <%= render 'shared/nolike' %>
+            <%= render 'shared/like_count', place: place %>
+          <% else %>
+            <%= render 'shared/favorite', place: place %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+function check(){
+  if(window.confirm('本当によろしいですか？')){
+    return true;
+  }
+  else{
+    window.alert('キャンセルされました');
+    return false;
+  }
+}
+</script>
+

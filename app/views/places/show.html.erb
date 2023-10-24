@@ -1,0 +1,66 @@
+<% content_for :js do %>
+  <%= javascript_import_module_tag "map_edit" %>
+<% end %>
+
+<div class="EditPlace py-3">
+  <h1>おでかけ場所の詳細</h1>
+  <div class="row">
+    <div class="newPlaceBox col-4">
+      <% if @place.image? %>
+        <%= image_tag @place.image.url, class:"card-img-top placeImage", size:"80x80" %>
+      <% else %>
+        <%= image_tag 'noimage.png', class:"card-img-top placeImage bg-light", size:"80x80" %>
+      <% end %>
+      <%= form_with(model: @place) do |form| %>
+      <div class="d-grid gap-2">
+        <div>
+          <%= form.label :name, "登録する場所の名前", style: "display: block" %>
+          <%= form.text_field :name, id: :searchName, class: "form-control", readonly: :true %>
+        </div>
+        <div>
+          <%= form.label :address, "住所", style: "display: block" %>
+          <%= form.text_field :address, id: :add, class: "form-control", readonly: :true %>
+        </div>
+        <div>
+          <%= form.label :description, "どんな場所？", style: "display: block" %>
+          <%= form.text_area :description, class: "form-control", readonly: :true %>
+        </div>
+        <div>
+          <%= form.label :schoolgrade, "対象年齢", style: "display: block" %>
+          <p>
+            <%= @place.schoolgrades.pluck(:grade).join(' , ') %>
+          </p>
+          <% if false %>
+          <%= form.collection_check_boxes :schoolgrade_ids, Schoolgrade.all, :id, :grade do |schoolgrade| %>
+            <div class="m-1 d-inline-block">
+              <%= schoolgrade.check_box %>
+              <%= schoolgrade.label %>
+            </div>
+          <% end %>
+          <% end %>
+        </div>
+        <div>
+          <%= form.label :latitude, "緯度", style: "display: block" %>
+          <%= form.text_field :latitude, id: :lat, class: "form-control", readonly: true %>
+        </div>
+        <div>
+          <%= form.label :longitude, "経度", style: "display: block" %>
+          <%= form.text_field :longitude, id: :lng, class: "form-control", readonly: true %>
+        </div>
+      </div>
+      <% end %>
+      <div class="d-flex d-grid gap-1">
+        <% if user_signed_in? %>
+          <% if @place.user_id == current_user.id %>
+            <%= link_to "編集", edit_place_path(@place), class: "btn btn-warning w-100 mt-2" %>
+            <%= link_to "削除", place_path, class: "btn btn-outline-warning w-100 mt-2", data: { turbo_method: :delete, turbo_confirm: "本当によろしいですか？" } %>
+          <% end %>
+        <% end %>
+        <%= link_to "一覧へ戻る", places_path, class: "btn btn-warning w-100 mt-2", data: { turbo: false } %>
+      </div>
+    </div>
+    <div class=col-8>
+      <%= render 'shared/map' %>
+    </div>
+  </div>
+</div>

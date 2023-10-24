@@ -1,0 +1,10 @@
+<h2>投稿済み一覧 <%= @places.count %>件</h2>
+<div id="places">
+  <div class="container">
+    <div class="row row-cols-1 row-cols-md-3 g-4 p-4">
+      <% @places.each do |place| %>
+        <%= render place %>
+      <% end %>
+    </div>
+  </div>
+</div>

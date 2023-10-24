@@ -1,0 +1,15 @@
+<div class="container mt-1">
+  <% if flash[:notice] %>
+    <p class="alert alert-warning alert-dismissible fade show">
+      <%= notice %>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+    </p>
+  <% end %>
+  <% if flash[:alert] %>
+    <p class="alert alert-danger alert-dismissible fade show">
+      <%= alert %>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+    </p>
+  <% end %>
+</div>
+

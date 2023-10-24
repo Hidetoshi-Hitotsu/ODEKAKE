@@ -2,7 +2,7 @@
 #
 # Table name: users
 #
-#  id                     :integer          not null, primary key
+#  id                     :bigint           not null, primary key
 #  email                  :string           default(""), not null
 #  encrypted_password     :string           default(""), not null
 #  image                  :string
@@ -21,5 +21,20 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  let(:user) { build(:user) }
+
+  it "has a valid factory" do
+    expect(user).to be_valid
+  end
+
+  it { is_expected.to validate_presence_of :name }
+  it { is_expected.to validate_presence_of :email }
+  it { is_expected.to validate_presence_of :password }
+  it { is_expected.to validate_uniqueness_of(:email).case_insensitive }
+  it { is_expected.to have_many :places }
+  it { is_expected.to have_many(:favorites).dependent(:destroy) }
+
+  it "is that guest user is valid " do
+    expect(User.guest).to be_valid
+  end
 end

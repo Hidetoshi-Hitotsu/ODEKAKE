@@ -1,0 +1,58 @@
+<%= form_with(model: place, data: { turbo: :false }) do |form| %>
+  <% if place.errors.any? %>
+    <div style="color: red">
+      <h3><%= pluralize(place.errors.count, "") %> 個の必須項目が未入力です</h3>
+      <ul>
+        <% place.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="d-grid gap-2">
+    <div>
+      <%= form.label :name, "登録する場所の名前", style: "display: block", class: "required" %>
+      <%= form.text_field :name, id: :searchName, class: "form-control" %>
+    </div>
+    <div>
+      <%= form.label :address, "住所", style: "display: block", class: "required" %>
+      <%= form.text_field :address, id: :add, class: "form-control" %>
+    </div>
+    <div>
+      <%= form.label :description, "どんな場所？", style: "display: block", class: "required" %>
+      <%= form.text_area :description, id:"description", class: "form-control" %>
+    </div>
+    <div>
+      <%= form.label :schoolgrade, "対象年齢は？", style: "display: block", class: "required" %>
+      <%= form.collection_check_boxes :schoolgrade_ids, Schoolgrade.all, :id, :grade do |schoolgrade| %>
+        <div class="m-1 d-inline-block">
+          <%= schoolgrade.check_box %>
+          <%= schoolgrade.label %>
+        </div>
+      <% end %>
+    </div>
+    <div>
+      <%= form.label :latitude, "緯度", style: "display: block", class: "required" %>
+      <%= form.text_field :latitude, id: :lat, class: "form-control" %>
+    </div>
+    <div>
+      <%= form.label :longitude, "経度", style: "display: block", class: "required" %>
+      <%= form.text_field :longitude, id: :lng, class: "form-control" %>
+    </div>
+    <div>
+      <%= form.label :image, "画像" %>
+      <label type="button" class="btn btn-outline-warning d-flex align-items-center gap-2">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-camera" viewBox="0 0 16 16">
+          <path d="M15 12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h1.172a3 3 0 0 0 2.12-.879l.83-.828A1 1 0 0 1 6.827 3h2.344a1 1 0 0 1 .707.293l.828.828A3 3 0 0 0 12.828 5H14a1 1 0 0 1 1 1v6zM2 4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-1.172a2 2 0 0 1-1.414-.586l-.828-.828A2 2 0 0 0 9.172 2H6.828a2 2 0 0 0-1.414.586l-.828.828A2 2 0 0 1 3.172 4H2z"/>
+          <path d="M8 11a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5zm0 1a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7zM3 6.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0z"/>
+        </svg>
+        <span>画像アップロード</span>
+        <%= form.file_field :image, class: "visually-hidden",onchange: "previewImage(this);" %>
+      </label>
+    </div>
+    <%= form.hidden_field :user_id, value: current_user.id, id: "hidden"%>
+    <div>
+      <%= form.submit "登録", class: "btn btn-warning w-100" %>
+    </div>
+  </div>
+<% end %>

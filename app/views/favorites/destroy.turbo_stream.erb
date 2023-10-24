@@ -1,0 +1,7 @@
+<%= turbo_stream.update "like-#{@place.id}" do %>
+  <%= render 'shared/unlike', place: @place %>
+<% end %>
+
+<%= turbo_stream.update "like-count-#{@place.id}" do %>
+  <%= render 'shared/like_count', place: @place %>
+<% end %>

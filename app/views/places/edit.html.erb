@@ -1,0 +1,25 @@
+<% content_for :js do %>
+  <%= javascript_import_module_tag "map_edit" %>
+<% end %>
+
+<div class="EditPlace py-3">
+  <h3>おでかけ場所の編集</h3>
+  <div class="d-flex">
+    <div class="newPlaceBox">
+      <div class="imageArea mb-2">
+        <% if @place.image? %>
+          <%= image_tag @place.image.url, class:"card-img-top placeImage", size:"80x80" %>
+        <% else %>
+          <%= image_tag 'noimage.png', class:"card-img-top placeImage bg-light", size:"80x80" %>
+        <% end %>
+      </div>
+      <%= render 'shared/search' %>
+      <%= render "form", place: @place %>
+      <div class="d-flex d-grid gap-1">
+        <%= link_to "編集をやめる", @place, class: "btn btn-outline-warning w-100 mt-2" %>
+        <%= link_to "一覧へ戻る", places_path, class: "btn btn-outline-warning w-100 mt-2" %>
+      </div>
+    </div>
+    <%= render 'shared/map' %>
+  </div>
+</div>
