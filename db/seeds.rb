@@ -7,8 +7,8 @@
 #   Character.create(name: "Luke", movie: movies.first)
 
 5.times do |n|
-  User.create do |user|
-    user.id = n + 100
+  User.create! do |user|
+    user.id = n + 1
     user.name = "testname#{n}"
     user.email = "test#{n}@example.com"
     user.password = "password#{n}"
@@ -32,6 +32,7 @@ schoolgrades = Schoolgrade.create!([
   { id: 5, grade: '中学生以上'},
 ])
 
+
 places = Place.create!([
   { id: 1,
     address: "〒617-0824 京都府長岡京市天神２丁目１５−１３",
@@ -39,7 +40,7 @@ places = Place.create!([
     latitude: 34.9228664,
     longitude: 135.686681,
     name: "長岡天満宮",
-    user_id: 100,
+    user_id: 1,
     schoolgrade_ids: [5]
   },
   { id: 2,
@@ -48,7 +49,7 @@ places = Place.create!([
     latitude: 34.8910328,
     longitude: 135.6910979,
     name: "背割堤",
-    user_id: 100,
+    user_id: 1,
     schoolgrade_ids: [4,5]
   },
   { id: 3,
@@ -57,7 +58,7 @@ places = Place.create!([
     latitude: 34.9235787,
     longitude: 135.6707491,
     name: "西代里山公園",
-    user_id: 102,
+    user_id: 2,
     schoolgrade_ids: [1,2,3]
   },
   { id: 4,
@@ -66,7 +67,7 @@ places = Place.create!([
     latitude: 34.93871866336308,
     longitude: 135.6778907775879,
     name: "光明寺",
-    user_id: 103,
+    user_id: 3,
     schoolgrade_ids: [4,5]
   },
   { id: 5,
@@ -75,7 +76,7 @@ places = Place.create!([
     latitude: 34.92742494561319,
     longitude: 135.67625999450684,
     name: "走田神社",
-    user_id: 104,
+    user_id: 4,
     schoolgrade_ids: [1,2,3]
   },
   { id: 6,
@@ -84,7 +85,7 @@ places = Place.create!([
     latitude: 34.9182125,
     longitude: 135.7002789,
     name: "勝竜寺城公園",
-    user_id: 101,
+    user_id: 0,
     schoolgrade_ids: [4,5]
   },
   { id: 7,
@@ -93,7 +94,7 @@ places = Place.create!([
     latitude: 34.91278653730758,
     longitude: 135.68994998931885,
     name: "西山こっぺ堂　本店",
-    user_id: 101,
+    user_id: 0,
     schoolgrade_ids: [2,3,4,5]
   },
   { id: 8,
@@ -102,15 +103,15 @@ places = Place.create!([
     latitude: 34.88762067353586,
     longitude: 135.6753158569336,
     name: "水無瀬川緑地公園",
-    user_id: 100,
+    user_id: 1,
     schoolgrade_ids: [1,2,3]
   },
 ])
 
 favorites = Favorite.create!([
-  { id: 1, place_id: 1, user_id: 102,},
-  { id: 2, place_id: 1, user_id: 103,},
-  { id: 3, place_id: 1, user_id: 104,},
-  { id: 4, place_id: 2, user_id: 104,},
-  { id: 5, place_id: 2, user_id: 100,},
+  { id: 1, place_id: 1, user_id: 2,},
+  { id: 2, place_id: 1, user_id: 3,},
+  { id: 3, place_id: 1, user_id: 4,},
+  { id: 4, place_id: 2, user_id: 4,},
+  { id: 5, place_id: 2, user_id: 0,},
 ])
