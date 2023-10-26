@@ -8,10 +8,10 @@
 
 5.times do |n|
   User.create! do |user|
-    user.id = n + 1
+    user.id = n
     user.name = "testname#{n}"
     user.email = "test#{n}@example.com"
-    user.password = "password#{n}"
+    user.password = "password"
   end
 end
 
