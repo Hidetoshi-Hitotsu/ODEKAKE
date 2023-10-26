@@ -50,9 +50,7 @@ RSpec.describe "Places", type: :system do
 
     expect do
       click_link "削除"
-      expect{
-        expect(page.accept_confirm).to eq "本当によろしいですか？"
-        }. to change(user.places, :count).by(-1)
-    end
+      expect(page.accept_confirm).to eq "本当によろしいですか？"
+    end.to change(user.places, :count).by(-1)
   end
 end
