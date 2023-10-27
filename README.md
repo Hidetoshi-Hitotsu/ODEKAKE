@@ -1,25 +1,39 @@
-# README
-
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
 # ODEKAKE
+
+お子様づれの方を想定したお出かけ場所の投稿・検索サイトです。<br>
+お出かけ場所には、対象となる年齢層が設定されているので、訪問時の齟齬は少なくなります。<br>
+お出かけ場所には画像登録も可能で、位置情報付きで共有することができます。
+
+<img width="1320" alt="スクリーンショット 0005-10-27 9 20 49" src="https://github.com/Hidetoshi-Hitotsu/ODEKAKE/assets/130296714/fb60275a-b5d8-4378-a95b-53da281b38a8">
+
+# URL
+https://odekake-nyav.onrender.com/<br>
+画面上部のゲストログインボタンから、メールアドレスとパスワードを入力せずにログインできます。
+
+# 使用技術
+* Ruby 3.2.2
+* Ruby on Rails 7.0.6
+* PostgreSQL 13.11
+* RSpec 3.12
+* Google Maps API
+
+# 機能一覧
+|  機能名  |  説明  |
+| ------------- | ------------- |
+| ログイン機能    　　| サインアップ・サインイン・サインアウト (devise) |
+| ゲストログイン機能 | ゲストユーザのサインイン・サインアウト (devise) |
+| 場所登録機能    　| お出かけ場所を登録できます。 (google maps api, geocoder, gem gon)|
+| 場所検索機能    　| お出かけ場所の検索ができます。対象年齢での検索も可能です。 |
+| プロフィール機能　　　 | プロフィール情報を編集できます。 |
+| いいね機能 　　　    | 場所にいいねができます。(turbo_stream) |
+| お気に入り一覧機能 | いいねした場所の一覧が確認できます。 |
+| ページネーション機能 | お出かけ場所のページネーション機能 (kaminari)|
+
+
+# 開発にあたって
+現在２児の父として子育て中ですが、子どもを連れてお出かけする際、せっかく訪れても年齢に見合う遊具がなくて残念な思いをしたり、トイレがなくて右往左往した経験が多数あります。<br>
+事前情報として、どのような対象年齢の子向けか、トイレなどはあるのかがわかるものがほしいということで、今回のサービスを作りました。<br>
+地図では好きな地点にマーカーを置けるので、施設だけでなく、ちょっとした子ども向けの遊びスポットも登録できるようにしています。
+
+# 今後の課題
+
