@@ -56,6 +56,7 @@ gem "bootstrap-form"
 gem "carrierwave"
 gem "mini_magick"
 gem "gon"
+gem "high_voltage"
 
 # Use Sass to process CSS
 # gem "sassc-rails"

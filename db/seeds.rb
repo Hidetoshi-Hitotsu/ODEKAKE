@@ -8,21 +8,12 @@
 
 5.times do |n|
   User.create! do |user|
-    user.id = n
-    user.name = "testname#{n}"
-    user.email = "test#{n}@example.com"
+    user.id = n + 1
+    user.name = "testname#{n+1}"
+    user.email = "test#{n+1}@example.com"
     user.password = "password"
   end
 end
-
-# 5.times do |n|
-#   User.create!(
-#     id: n
-#     name: "testname#{n}"
-#     email: "test#{n}@example.com"
-#     password: "password#{n}"
-#   )
-# end
 
 schoolgrades = Schoolgrade.create!([
   { id: 1, grade: '未就学児'},
@@ -31,7 +22,6 @@ schoolgrades = Schoolgrade.create!([
   { id: 4, grade: '小学５・６年生'},
   { id: 5, grade: '中学生以上'},
 ])
-
 
 places = Place.create!([
   { id: 1,
@@ -109,9 +99,9 @@ places = Place.create!([
 ])
 
 favorites = Favorite.create!([
-  { id: 1, place_id: 1, user_id: 2,},
-  { id: 2, place_id: 1, user_id: 3,},
-  { id: 3, place_id: 1, user_id: 4,},
-  { id: 4, place_id: 2, user_id: 4,},
-  { id: 5, place_id: 2, user_id: 0,},
+  { place_id: 1, user_id: 2,},
+  { place_id: 1, user_id: 3,},
+  { place_id: 1, user_id: 4,},
+  { place_id: 2, user_id: 4,},
+  { place_id: 2, user_id: 0,},
 ])
