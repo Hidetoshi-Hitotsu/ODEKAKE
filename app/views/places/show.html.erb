@@ -22,22 +22,22 @@
           <%= form.text_field :address, id: :add, class: "form-control", readonly: :true %>
         </div>
         <div>
-          <%= form.label :description, "どんな場所？", style: "display: block" %>
-          <%= form.text_area :description, class: "form-control", readonly: :true %>
-        </div>
-        <div>
           <%= form.label :schoolgrade, "対象年齢", style: "display: block" %>
           <p>
             <%= @place.schoolgrades.pluck(:grade).join(' , ') %>
           </p>
-          <% if false %>
-          <%= form.collection_check_boxes :schoolgrade_ids, Schoolgrade.all, :id, :grade do |schoolgrade| %>
-            <div class="m-1 d-inline-block">
-              <%= schoolgrade.check_box %>
-              <%= schoolgrade.label %>
-            </div>
-          <% end %>
-          <% end %>
+        </div>
+        <div>
+          <%= form.label :description, "おすすめの理由は？", style: "display: block" %>
+          <%= form.text_area :description, class: "form-control", readonly: :true %>
+        </div>
+        <div>
+          <%= form.label :toilet, "トイレ" %>
+          <%= @place.toilet %>
+        </div>
+        <div>
+          <%= form.label :vendingmachine, "自動販売機" %>
+          <%= @place.vendingmachine %>
         </div>
         <div>
           <%= form.label :latitude, "緯度", style: "display: block" %>

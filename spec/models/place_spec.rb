@@ -2,16 +2,18 @@
 #
 # Table name: places
 #
-#  id          :bigint           not null, primary key
-#  address     :string
-#  description :string
-#  image       :string
-#  latitude    :float
-#  longitude   :float
-#  name        :string
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
-#  user_id     :integer
+#  id             :bigint           not null, primary key
+#  address        :string
+#  description    :string
+#  image          :string
+#  latitude       :float
+#  longitude      :float
+#  name           :string
+#  toilet         :string
+#  vendingmachine :string
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#  user_id        :integer
 #
 require 'rails_helper'
 
@@ -40,8 +42,8 @@ RSpec.describe Place, type: :model do
   end
 
   it "is able to search about name, address, description and schoolgrades" do
-    expect(Place.search("My", "").count).to eq 4
-    expect(Place.search("2", "").count).to eq 1
-    expect(Place.search("", "1").count).to eq 1
+    expect(Place.search("My", "", "", "").count).to eq 4
+    expect(Place.search("", "", "あり", "").count).to eq 4
+    expect(Place.search("", "", "", "なし").count).to eq 0
   end
 end

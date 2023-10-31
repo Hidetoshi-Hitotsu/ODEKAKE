@@ -19,10 +19,6 @@
       <%= form.text_field :address, id: :add, class: "form-control" %>
     </div>
     <div>
-      <%= form.label :description, "どんな場所？", style: "display: block", class: "required" %>
-      <%= form.text_area :description, id:"description", class: "form-control" %>
-    </div>
-    <div>
       <%= form.label :schoolgrade, "対象年齢は？", style: "display: block", class: "required" %>
       <%= form.collection_check_boxes :schoolgrade_ids, Schoolgrade.all, :id, :grade do |schoolgrade| %>
         <div class="m-1 d-inline-block">
@@ -30,6 +26,18 @@
           <%= schoolgrade.label %>
         </div>
       <% end %>
+    </div>
+    <div>
+      <%= form.label :description, "おすすめの理由は？", style: "display: block", class: "required" %>
+      <%= form.text_area :description, id:"description", class: "form-control" %>
+    </div>
+    <div>
+      <%= form.label :toilet, "トイレ", style: "display: block" %>
+      <%= form.select :toilet, ["優先トイレあり", "あり", "なし"], { include_blank: "選択してください" }, class: "form-select" %>
+    </div>
+    <div>
+      <%= form.label :vendingmachine, "自動販売機", style: "display: block" %>
+      <%= form.select :vendingmachine, ["あり", "なし"], { include_blank: "選択してください" }, class: "form-select" %>
     </div>
     <div>
       <%= form.label :latitude, "緯度", style: "display: block", class: "required" %>
@@ -50,7 +58,7 @@
         <%= form.file_field :image, class: "visually-hidden",onchange: "previewImage(this);" %>
       </label>
     </div>
-    <%= form.hidden_field :user_id, value: current_user.id, id: "hidden"%>
+    <%= form.hidden_field :user_id, value: current_user.id, id: "hidden" %>
     <div>
       <%= form.submit "登録", class: "btn btn-warning w-100" %>
     </div>

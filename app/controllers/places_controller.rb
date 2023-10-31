@@ -6,8 +6,8 @@ class PlacesController < ApplicationController
   def index
     @places_to_js = Place.includes([:schoolgrades, :favorites])
     @places = @places_to_js.page(params[:page])
-    if params[:schoolgrade_id].present? || params[:keyword].present?
-      @places_to_js = Place.search(params[:keyword], params[:schoolgrade_id]).includes(:schoolgrades)
+    if params[:schoolgrade_id].present? || params[:keyword].present? || params[:toilet] || params[:vendingmachine]
+      @places_to_js = Place.search(params[:keyword], params[:schoolgrade_id], params[:toilet], params[:vendingmachine]).includes([:schoolgrades, :favorites])
       @places = @places_to_js.page(params[:page])
     end
     gon.places = @places_to_js.handover_to_js
@@ -76,7 +76,7 @@ class PlacesController < ApplicationController
   end
 
   def place_params
-    params.require(:place).permit(:name, :address, :latitude, :longitude, :description, :image, :user_id, schoolgrade_ids: [])
+    params.require(:place).permit(:name, :address, :latitude, :longitude, :description, :image, :user_id, :toilet, :vendingmachine, schoolgrade_ids: [])
   end
 
   def contributor

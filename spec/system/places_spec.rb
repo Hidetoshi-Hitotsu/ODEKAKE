@@ -12,7 +12,7 @@ RSpec.describe "Places", type: :system do
       fill_in "searchName", with: "TestName"
       fill_in "add", with: "TestAddres"
       fill_in "description", with: "TestDescription"
-      check "1Grade"
+      check "Grade"
       fill_in "lat", with: "35"
       fill_in "lng", with: "135"
       find('#hidden', visible: false).set(user.id)
@@ -41,7 +41,7 @@ RSpec.describe "Places", type: :system do
     end
   end
 
-  scenario "user destroy a place" do
+  scenario "user destroy a place", js: true do
     user = create(:user)
     schoolgrade = create(:schoolgrade)
     schoolgrade
@@ -49,8 +49,9 @@ RSpec.describe "Places", type: :system do
     create_new_place_as user
 
     expect do
-      click_link "削除"
-      expect(page.accept_confirm).to eq "本当によろしいですか？"
+      click_button "削除"
+      page.accept_confirm
+      expect(page).to have_content "登録していた場所を削除しました。"
     end.to change(user.places, :count).by(-1)
   end
 end

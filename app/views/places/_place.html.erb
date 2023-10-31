@@ -10,15 +10,21 @@
         <h5 class="card-title fw-bold text-warning-emphasis"><%= place.name %></h5>
         <p class="card-text txt-limit"><%= place.address %></p>
         <p class="card-text">
-          <div class="text-warning-emphasis fw-bold">どんな場所？ </div>
+          <div class="text-warning-emphasis fw-bold">対象年齢は？ </div>
+          <%= place.schoolgrades.pluck(:grade).join(' , ') %>
+        </p>
+        <p class="card-text">
+          <div class="text-warning-emphasis fw-bold">おすすめ理由は？ </div>
           <div class="txt-limit2">
             <%= place.description %>
           </div>
         </p>
-        <p class="card-text">
-          <div class="text-warning-emphasis fw-bold">対象年齢は？ </div>
-          <%= place.schoolgrades.pluck(:grade).join(' , ') %>
-        </p>
+        <% if place.toilet.present? %>
+          <p class="card-text"><span class="text-warning-emphasis fw-bold">トイレ </span><%= place.toilet %></p>
+        <% end %>
+        <% if place.vendingmachine.present? %>
+          <p class="card-text"><span class="text-warning-emphasis fw-bold">自動販売機 </span><%= place.vendingmachine %></p>
+        <% end %>
       </div>
       <div class="card-footer bg-white d-flex align-items-center gap-1">
         <%= link_to "詳細", place_path(place.id), class:"btn btn-warning", data: { turbo: false } %>
