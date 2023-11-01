@@ -4,7 +4,12 @@
 お出かけ場所には、対象となる年齢層が設定されているので、訪問時の齟齬は少なくなります。<br>
 お出かけ場所には画像登録も可能で、位置情報付きで共有することができます。
 
-<img width="1320" alt="スクリーンショット 0005-10-27 9 20 49" src="https://github.com/Hidetoshi-Hitotsu/ODEKAKE/assets/130296714/fb60275a-b5d8-4378-a95b-53da281b38a8">
+<img width="1294" alt="スクリーンショット 0005-11-01 10 12 22" src="https://github.com/Hidetoshi-Hitotsu/ODEKAKE/assets/130296714/f8ab2f95-294d-45e2-9ea9-68a976de4b5f">
+
+<br><br>
+検索すると、条件に合致したおでかけ場所が閲覧できます。
+<br><br>
+<img width="1320" alt="スクリーンショット 0005-11-01 10 15 07" src="https://github.com/Hidetoshi-Hitotsu/ODEKAKE/assets/130296714/59dcf331-294a-4b44-a110-c0473c1fcde8">
 
 # URL
 https://odekake-nyav.onrender.com/<br>
@@ -34,6 +39,3 @@ https://odekake-nyav.onrender.com/<br>
 現在２児の父として子育て中ですが、子どもを連れてお出かけする際、せっかく訪れても年齢に見合う遊具がなくて残念な思いをしたり、トイレがなくて右往左往した経験が多数あります。<br>
 事前情報として、どのような対象年齢の子向けか、トイレなどはあるのかがわかるものがほしいということで、今回のサービスを作りました。<br>
 地図では好きな地点にマーカーを置けるので、施設だけでなく、ちょっとした子ども向けの遊びスポットも登録できるようにしています。
-
-# 今後の課題
-
