@@ -2,7 +2,7 @@
   <div class="d-flex my-4 text-center card container-xs w-75 shadow">
     <main class="form-signin w-75 m-auto card-body">
       <%= image_tag "person-circle.svg",  alt: "画像", width: "80px", class: "text-primary-emphasis" %>
-      <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+      <%= form_for(resource, as: resource_name, url: session_path(resource_name), data: { turbo: :false }) do |f| %>
         <div class="field form-floating my-3">
           <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control", placeholder: "Eメール" %>
           <%= f.label :email, for: "floatingInput" %>

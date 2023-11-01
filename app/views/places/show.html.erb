@@ -14,38 +14,28 @@
       <%= form_with(model: @place) do |form| %>
       <div class="d-grid gap-2">
         <div>
-          <%= form.label :name, "登録する場所の名前", style: "display: block" %>
-          <%= form.text_field :name, id: :searchName, class: "form-control", readonly: :true %>
+          <span class="text-warning-emphasis fw-bold">場所の名前</span>
+          <p class="container"><%= @place.name %></p>
         </div>
         <div>
-          <%= form.label :address, "住所", style: "display: block" %>
-          <%= form.text_field :address, id: :add, class: "form-control", readonly: :true %>
+          <span class="text-warning-emphasis fw-bold">住所</span>
+          <p class="container"><%= @place.address %></p>
         </div>
         <div>
-          <%= form.label :schoolgrade, "対象年齢", style: "display: block" %>
-          <p>
-            <%= @place.schoolgrades.pluck(:grade).join(' , ') %>
-          </p>
+          <span class="text-warning-emphasis fw-bold">対象年齢</span>
+          <p class="container"> <%= @place.schoolgrades.pluck(:grade).join(' , ') %></p>
         </div>
         <div>
-          <%= form.label :description, "おすすめの理由は？", style: "display: block" %>
-          <%= form.text_area :description, class: "form-control", readonly: :true %>
+          <span class="text-warning-emphasis fw-bold">おすすめの理由は？</span>
+          <p class="container"><%= @place.description %></p>
         </div>
         <div>
-          <%= form.label :toilet, "トイレ" %>
+          <span class="text-warning-emphasis fw-bold">トイレ：</span>
           <%= @place.toilet %>
         </div>
         <div>
-          <%= form.label :vendingmachine, "自動販売機" %>
+          <span class="text-warning-emphasis fw-bold">自動販売機：</span>
           <%= @place.vendingmachine %>
-        </div>
-        <div>
-          <%= form.label :latitude, "緯度", style: "display: block" %>
-          <%= form.text_field :latitude, id: :lat, class: "form-control", readonly: true %>
-        </div>
-        <div>
-          <%= form.label :longitude, "経度", style: "display: block" %>
-          <%= form.text_field :longitude, id: :lng, class: "form-control", readonly: true %>
         </div>
       </div>
       <% end %>

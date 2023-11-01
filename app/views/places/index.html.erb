@@ -14,11 +14,11 @@
           </div>
           <div class="mb-3">
             <span class="fw-bold">トイレは？</span>
-            <%= f.select :toilet, ["優先トイレあり", "あり", "なし"], { include_blank: "選択してください" }, class: "form-select" %>
+            <%= f.select :toilet, ["優先トイレあり", "あり"], { include_blank: "選択してください" }, class: "form-select" %>
           </div>
           <div class="mb-3">
             <span class="fw-bold">自動販売機は？</span>
-            <%= f.select :vendingmachine, ["あり", "なし"], { include_blank: "選択してください" }, class: "form-select" %>
+            <%= f.select :vendingmachine, ["あり"], { include_blank: "選択してください" }, class: "form-select" %>
           </div>
           <div class="d-flex">
             <%= f.text_field :keyword, class:"form-control", placeholder: 'キーワードを入力'%>
