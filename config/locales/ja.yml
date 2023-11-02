@@ -11,6 +11,7 @@ ja:
         address:   '住所'
         name:      '登録する場所の名前'
         schoolgrades: '対象年齢'
+        description: 'おすすめ理由'
     errors:
       messages:
         record_invalid: 'バリデーションに失敗しました: %{errors}'
