@@ -41,11 +41,11 @@
     </div>
     <div>
       <%= form.label :latitude, "緯度", style: "display: block", class: "required" %>
-      <%= form.text_field :latitude, id: :lat, class: "form-control" %>
+      <%= form.text_field :latitude, id: :lat, class: "form-control", readonly: true %>
     </div>
     <div>
       <%= form.label :longitude, "経度", style: "display: block", class: "required" %>
-      <%= form.text_field :longitude, id: :lng, class: "form-control" %>
+      <%= form.text_field :longitude, id: :lng, class: "form-control", readonly: true %>
     </div>
     <div>
       <%= form.label :image, "画像" %>

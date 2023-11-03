@@ -4,8 +4,8 @@
 
 <div class="newPlace pb-3">
   <h3>おでかけ場所の登録</h3>
-  <div class="d-flex">
-    <div class="newPlaceBox card w-75 shadow p-2">
+  <div class="row">
+    <div class="col-lg-5 order-2 order-lg-1 newPlaceBox card shadow p-2">
       <div class="card-body">
         <div class="imageArea mb-2">
           <%= image_tag 'noimage.png',id: "preview-image", class:"card-img-top placeImage bg-light", size:"80x80" %>
@@ -17,7 +17,9 @@
         </div>
       </div>
     </div>
-    <%= render 'shared/map' %>
+    <div class="col-lg-7 order-1 order-lg-2 mb-3 mb-lg-0 ">
+      <%= render 'shared/map' %>
+    </div>
   </div>
 </div>
 

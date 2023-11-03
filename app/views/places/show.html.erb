@@ -5,7 +5,66 @@
 <div class="EditPlace py-3">
   <h1>おでかけ場所の詳細</h1>
   <div class="row">
-    <div class="newPlaceBox col-4">
+    <div class="col-lg-4 mb-3 mb-lg-0">
+      <div id="<%= dom_id @place %>">
+        <div class="col h-100">
+          <div class="card h-100 p-2">
+            <% if @place.image? %>
+              <%= image_tag @place.image.url, class:"card-img-top placeImage", size:"80x80" %>
+            <% else %>
+              <%= image_tag 'noimage.png', class:"card-img-top placeImage bg-light", size:"80x80" %>
+            <% end %>
+            <div class="card-body">
+              <h4 class="card-title fw-bold text-warning-emphasis"><%= @place.name %></h4>
+              <p class="card-text"><%= @place.address %></p>
+              <p class="card-text">
+                <div class="text-warning-emphasis fw-bold">対象年齢は？ </div>
+                <%= @place.schoolgrades.pluck(:grade).join(' , ') %>
+              </p>
+              <p class="card-text">
+                <div class="text-warning-emphasis fw-bold">おすすめ理由は？ </div>
+                <div class="txt-limit2">
+                  <%= @place.description %>
+                </div>
+              </p>
+              <p class="card-text">
+                <span class="text-warning-emphasis fw-bold">トイレ </span>
+                <% if @place.toilet.present? %>
+                  <%= @place.toilet %>
+                <% else %>
+                  未入力
+                <% end %>
+              </p>
+              <p class="card-text">
+                <span class="text-warning-emphasis fw-bold">自動販売機 </span>
+                <% if @place.vendingmachine.present? %>
+                  <%= @place.vendingmachine %>
+                <% else %>
+                  未入力
+                <% end %>
+              </p>
+            </div>
+            <div class="card-footer bg-white d-flex align-items-center gap-1">
+              <% if user_signed_in? %>
+                <% if @place.user_id == current_user.id %>
+                  <%= link_to "編集", edit_place_path(@place.id), data: { turbo: false }, class:"btn btn-outline-warning" %>
+                  <%= button_to "削除", place_path(@place.id), class:"btn btn-outline-secondary", data_bs_toggle: "modal", data_bs_target: "#confirmModal", method: :delete, data: { turbo: false }, form: { onSubmit: "return check()" } %>
+                  <%= render 'shared/nolike' %>
+                  <%= render 'shared/like_count', place: @place %>
+                <% else %>
+                  <%= render 'shared/favorite', place: @place %>
+                <% end %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-8">
+        <%= render 'shared/map' %>
+    </div>
+  <% if false %>
+    <div class="newPlaceBox col-sm-11 col-4">
       <% if @place.image? %>
         <%= image_tag @place.image.url, class:"card-img-top placeImage", size:"80x80" %>
       <% else %>
@@ -53,8 +112,9 @@
         <%= link_to "一覧へ戻る", places_path, class: "btn btn-warning w-100 mt-2", data: { turbo: false } %>
       </div>
     </div>
-    <div class=col-8>
+    <div class="col-sm-11 col-8">
       <%= render 'shared/map' %>
     </div>
+  <% end %>
   </div>
 </div>

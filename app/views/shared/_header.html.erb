@@ -1,27 +1,35 @@
 <div class="container">
-<nav class="navbar navbar-expand-lg text-bg-warning">
-  <div class="container-fluid">
-    <%= link_to root_path, data: { turbo: false } do %>
-      <%= image_tag "logo_and_pig.png",  alt: "おでかけ", width: "320px" %>
-    <% end %>
-    <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="offcanvas offcanvas-end text-bg-warning" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
-      <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="offcanvasNavbarLabel">おでかけ</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-      </div>
-      <div class="offcanvas-body">
-        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-          <% if user_signed_in? %>
-            <li class="nav-item">
+  <nav class="navbar navbar-expand-lg text-bg-warning">
+    <div class="container-fluid">
+      <%= link_to root_path, data: { turbo: false } do %>
+        <%= image_tag "logo_and_pig.png",  alt: "おでかけ", width: "320px" %>
+      <% end %>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item"></li>
+        </ul>
+        <% if user_signed_in? %>
+          <ul class="list-group list-group-flush fw-semibold navbar-nav mx-3 my-2 d-lg-none">
+            <li class="list-group-item nav-item text-bg-warning"><%= link_to "HOME", root_path,  class: "text-dark nav-link fs-6" %></li>
+            <li class="list-group-item nav-item text-bg-warning"><%= link_to "お出かけ場所を登録", new_place_path, class: "text-dark nav-link fs-6" %></li>
+            <li class="list-group-item nav-item text-bg-warning"><%= link_to "投稿済み一覧", own_places_path, class: "text-dark nav-link fs-6" %></li>
+            <li class="list-group-item nav-item text-bg-warning"><%= link_to "お気に入り一覧", favorited_places_path, class: "text-dark nav-link fs-6" %></li>
+            <li class="list-group-item nav-item text-bg-warning"><%= link_to "アカウント設定",  edit_user_registration_path,  class: "text-dark nav-link fs-6" %></li>
+            <li class="list-group-item nav-item text-bg-warning"><%= link_to "ログアウト",  destroy_user_session_path, data: { turbo_method: :delete }, class: "text-dark nav-link fs-6" %></li>
+          </ul>
+        <% end %>
+        <% if user_signed_in? %>
+          <div class="header-button d-flex justify-content-center">
+            <div class="d-none d-lg-block">
               <%= link_to new_place_path, id: "place-new-link", class: "btn btn-outline-light me-2", data: { turbo: false } do %>
                 <%= image_tag 'orangepig.png', class:"rounded-circle", size:"40x40" %>
                 おでかけ場所を登録
               <% end %>
-            </li>
-            <li class="nav-item dropdown">
+            </div>
+            <div class="dropdown d-none d-lg-block">
               <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenu1" data-bs-toggle="dropdown" aria-expanded="false">
                 <% if current_user.image? %>
                   <%= image_tag current_user.image.url, class:"rounded-circle", size:"40x40" %>
@@ -39,18 +47,31 @@
                 <li><hr class="dropdown-driver"></li>
                 <li><%= link_to "ログアウト",  destroy_user_session_path, data: { turbo_method: :delete }, class: "dropdown-item" %></li>
               </ul>
-            </li>
-          <% else %>
+            </div>
+          </div>
+        <% else %>
+          <div class="d-flex justify-content-center my-3 my-lg-0">
             <%= link_to 'ゲストログイン(閲覧用)', users_guest_sign_in_path, data: { turbo_method: :post }, class: "btn btn-dark me-2" %>
             <%= link_to 'ログイン', new_user_session_path, class: "btn btn-outline-light me-2" %>
             <%= link_to '新規登録', new_user_registration_path, class: "btn btn-light me-2" %>
-          <% end %>
-        </ul>
+          </div>
+        <% end %>
       </div>
     </div>
-  </div>
-</nav>
+  </nav>
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
 
 <% if false %>
 <header class="container px-5 py-2 text-bg-warning">

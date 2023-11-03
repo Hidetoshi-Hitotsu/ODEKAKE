@@ -1,6 +1,6 @@
 <%= render "devise/shared/error_messages", resource: resource %>
 <div class="d-flex justify-content-center">
-  <div class="d-flex my-4 text-center card w-50 shadow">
+  <div class="d-flex my-4 text-center card shadow">
     <main class="form-signin w-75 m-auto card-body">
       <%= image_tag "person-circle.svg",  alt: "画像", width: "80px", class: "text-primary-emphasis", id:"uploadIcon" %>
       <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
