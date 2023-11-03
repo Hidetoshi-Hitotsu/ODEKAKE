@@ -21,7 +21,7 @@ class Place < ApplicationRecord
   has_many :favorites, dependent: :destroy
   belongs_to :user
   mount_uploader :image, ImageUploader
-  validates_presence_of :latitude, :longitude, :address, :name, :description, :schoolgrades
+  validates_presence_of  :name, :address, :schoolgrades, :description, :latitude, :longitude
 
   def self.handover_to_js
     Place.pluck(:id, :latitude, :longitude)

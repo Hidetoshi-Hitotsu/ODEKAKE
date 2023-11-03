@@ -1,6 +1,6 @@
 <div class="d-flex justify-content-center">
-  <div class="d-flex my-4 text-center card shadow" >
-    <main class="form-signin m-auto card-body">
+  <div class="my-4 text-center card shadow"  style="width: 32rem;" >
+    <main class="form-signin card-body mx-3">
       <%= image_tag "person-circle.svg",  alt: "画像", width: "80px", class: "text-primary-emphasis" %>
       <%= form_for(resource, as: resource_name, url: session_path(resource_name), data: { turbo: :false }) do |f| %>
         <div class="field form-floating my-3">

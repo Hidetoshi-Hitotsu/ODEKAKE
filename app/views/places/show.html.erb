@@ -63,58 +63,17 @@
     <div class="col-lg-8">
         <%= render 'shared/map' %>
     </div>
-  <% if false %>
-    <div class="newPlaceBox col-sm-11 col-4">
-      <% if @place.image? %>
-        <%= image_tag @place.image.url, class:"card-img-top placeImage", size:"80x80" %>
-      <% else %>
-        <%= image_tag 'noimage.png', class:"card-img-top placeImage bg-light", size:"80x80" %>
-      <% end %>
-      <%= form_with(model: @place) do |form| %>
-      <div class="d-grid gap-2">
-        <div>
-          <span class="text-warning-emphasis fw-bold">場所の名前</span>
-          <p class="container"><%= @place.name %></p>
-        </div>
-        <div>
-          <span class="text-warning-emphasis fw-bold">住所</span>
-          <p class="container"><%= @place.address %></p>
-        </div>
-        <div>
-          <span class="text-warning-emphasis fw-bold">対象年齢</span>
-          <p class="container"> <%= @place.schoolgrades.pluck(:grade).join(' , ') %></p>
-        </div>
-        <div>
-          <span class="text-warning-emphasis fw-bold">おすすめの理由は？</span>
-          <p class="container"><%= @place.description %></p>
-        </div>
-        <div>
-          <span class="text-warning-emphasis fw-bold">トイレ：</span>
-          <%= @place.toilet %>
-        </div>
-        <div>
-          <span class="text-warning-emphasis fw-bold">自動販売機：</span>
-          <%= @place.vendingmachine %>
-        </div>
-      </div>
-      <% end %>
-      <div class="d-flex d-grid gap-1">
-        <% if user_signed_in? %>
-          <% if @place.user_id == current_user.id %>
-            <%= link_to "編集", edit_place_path(@place), class: "btn btn-warning w-100 mt-2" %>
-            <%= link_to "削除", place_path, class: "btn btn-outline-warning w-100 mt-2", data: { turbo_method: :delete, turbo_confirm: "本当によろしいですか？" } %>
-            <%= render 'shared/nolike' %>
-            <%= render 'shared/like_count', place: @place %>
-          <% else %>
-            <%= render 'shared/favorite', place: @place %>
-          <% end %>
-        <% end %>
-        <%= link_to "一覧へ戻る", places_path, class: "btn btn-warning w-100 mt-2", data: { turbo: false } %>
-      </div>
-    </div>
-    <div class="col-sm-11 col-8">
-      <%= render 'shared/map' %>
-    </div>
-  <% end %>
   </div>
 </div>
+
+<script>
+function check(){
+  if(window.confirm('本当によろしいですか？')){
+    return true;
+  }
+  else{
+    window.alert('キャンセルされました');
+    return false;
+  }
+}
+</script>
