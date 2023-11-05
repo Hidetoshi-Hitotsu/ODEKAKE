@@ -39,6 +39,10 @@
       <%= form.label :vendingmachine, "自動販売機", style: "display: block" %>
       <%= form.select :vendingmachine, ["あり", "なし"], { include_blank: "選択してください" }, class: "form-select" %>
     </div>
+    <div class="mt-3 fw-semibold text-warning-emphasis">
+      <%= image_tag 'orangepig.png', class:"rounded-circle", size:"30x30" %>
+      検索すると、以下の緯度と経度は自動入力されます。
+    </div>
     <div>
       <%= form.label :latitude, "緯度", style: "display: block", class: "required" %>
       <%= form.text_field :latitude, id: :lat, class: "form-control", readonly: true %>

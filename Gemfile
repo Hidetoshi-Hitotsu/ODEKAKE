@@ -58,6 +58,7 @@ gem "mini_magick"
 gem "gon"
 gem "high_voltage"
 gem "aws-sdk-s3", require: false
+gem "fog-aws"
 
 # Use Sass to process CSS
 # gem "sassc-rails"
