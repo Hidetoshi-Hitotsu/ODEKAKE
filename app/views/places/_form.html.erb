@@ -41,7 +41,7 @@
     </div>
     <div class="mt-3 fw-semibold text-warning-emphasis">
       <%= image_tag 'orangepig.png', class:"rounded-circle", size:"30x30" %>
-      検索すると、以下の緯度と経度は自動入力されます。
+      検索すると、緯度と経度は自動入力されます。
     </div>
     <div>
       <%= form.label :latitude, "緯度", style: "display: block", class: "required" %>
@@ -59,7 +59,7 @@
           <path d="M8 11a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5zm0 1a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7zM3 6.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0z"/>
         </svg>
         <span>画像アップロード</span>
-        <%= form.file_field :image, class: "visually-hidden",onchange: "previewImage(this);" %>
+        <%= form.file_field :image, class: "visually-hidden", onchange: "previewImage(this);" %>
       </label>
     </div>
     <%= form.hidden_field :user_id, value: current_user.id, id: "hidden" %>

@@ -40,7 +40,15 @@
 <div id="places">
   <div class="container">
     <%= turbo_frame_tag "place-list" do %>
-    <h2>おでかけ場所　<%= @places.total_count%>件</h2>
+      <div class="d-flex justify-content-between align-items-center">
+        <h2>おでかけ場所　<%= @places.total_count%>件</h2>
+        <div class="sortBox fw-medium">
+          <%= link_to '作成が新しい順  |  ', places_path(latest: "true"), class: "text-warning-emphasis" %>
+          <%= link_to '作成が古い順  |  ', places_path(old: "true"), class: "text-warning-emphasis" %>
+          <%= link_to '更新が新しい順  |  ', places_path(latest_update: "true"), class: "text-warning-emphasis" %>
+          <%= link_to 'いいね順', places_path(star_count: "true"), class: "text-warning-emphasis" %>
+        </div>
+      </div>
       <div class="row row-cols-1 row-cols-lg-2 row-cols-xl-3 g-4 p-4">
         <% @places.each do |place| %>
           <%= render place %>

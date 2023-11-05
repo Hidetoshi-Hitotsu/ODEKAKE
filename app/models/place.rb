@@ -22,6 +22,11 @@ class Place < ApplicationRecord
   belongs_to :user
   mount_uploader :image, ImageUploader
   validates_presence_of  :name, :address, :schoolgrades, :description, :latitude, :longitude
+  scope :latest, -> {order(created_at: :desc)}
+  scope :old, -> {order(created_at: :asc)}
+  scope :latest_update, -> {order(updated_at: :desc)}
+  scope :favorite_count, -> {order(favorites: :desc)}
+
 
   def self.handover_to_js
     Place.pluck(:id, :latitude, :longitude)

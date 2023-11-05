@@ -11,6 +11,15 @@ class PlacesController < ApplicationController
       @places = @places_to_js.page(params[:page])
     end
     gon.places = @places_to_js.handover_to_js
+    if params[:latest]
+      @places = @places.latest
+    elsif params[:latest_update]
+      @places = @places.latest_update
+    elsif params[:old]
+      @places = @places.old
+    elsif params[:favorite_count]
+      @places = @places.favorite_count
+    end
   end
 
   def show
