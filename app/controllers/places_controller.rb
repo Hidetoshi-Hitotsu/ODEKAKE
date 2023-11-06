@@ -4,22 +4,29 @@ class PlacesController < ApplicationController
   before_action :contributor, only: %i(edit update destroy)
 
   def index
+    # @places_to_js = Place.includes([:schoolgrades, :favorites])
+    # @places = @places_to_js.page(params[:page])
+    # if params[:schoolgrade_id].present? || params[:keyword].present? || params[:toilet] || params[:vendingmachine]
+    #   @places_to_js = Place.search(params[:keyword], params[:schoolgrade_id], params[:toilet], params[:vendingmachine]).includes([:schoolgrades, :favorites])
+    #   @places = @places_to_js.page(params[:page])
+    # end
+    # gon.places = @places_to_js.handover_to_js
+    # if params[:latest]
+    #   @places = @places_to_js.latest.page(params[:page])
+    # elsif params[:latest_update]
+    #   @places = @places_to_js.latest_update.page(params[:page])
+    # elsif params[:old]
+    #   @places = @places_to_js.old.page(params[:page])
+    # elsif params[:favorite_count]
+    #   @places = @places_to_js.favorite_count.page(params[:page])
+    # end
     @places_to_js = Place.includes([:schoolgrades, :favorites])
     @places = @places_to_js.page(params[:page])
-    if params[:schoolgrade_id].present? || params[:keyword].present? || params[:toilet] || params[:vendingmachine]
-      @places_to_js = Place.search(params[:keyword], params[:schoolgrade_id], params[:toilet], params[:vendingmachine]).includes([:schoolgrades, :favorites])
-      @places = @places_to_js.page(params[:page])
-    end
+    
+    @search = Place.ransack(params[:q])
+    @places_to_js = @search.result
+    @places = @places_to_js.page(params[:page])
     gon.places = @places_to_js.handover_to_js
-    if params[:latest]
-      @places = @places.latest
-    elsif params[:latest_update]
-      @places = @places.latest_update
-    elsif params[:old]
-      @places = @places.old
-    elsif params[:favorite_count]
-      @places = @places.favorite_count
-    end
   end
 
   def show

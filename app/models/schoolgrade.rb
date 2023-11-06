@@ -10,4 +10,12 @@
 class Schoolgrade < ApplicationRecord
   has_many :targets
   has_many :places, through: :targets
+
+  def self.ransackable_associations(auth_object = nil)
+    ["places", "targets"]
+  end
+
+  def self.ransackable_attributes(auth_object = nil)
+    ["grade"]
+  end
 end

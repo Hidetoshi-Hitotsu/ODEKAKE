@@ -2,6 +2,45 @@
   <%= javascript_import_module_tag "map" %>
 <% end %>
 
+<%# if false %>
+<div class="w-50">
+<%= search_form_for @search do |f| %>
+  <div class="mb-3 col-md-6 col-lg-11">
+    <span class="fw-bold">対象年齢を選んでください</span>
+    <%= f.select :schoolgrades_grade_cont, options_from_collection_for_select(Schoolgrade.all, :grade, :grade), { include_blank: "選択してください" }, class: "form-select" %>
+  </div>
+  <div class="mb-3 col-md-6 col-lg-11">
+    <span class="fw-bold">トイレは？</span>
+    <%= f.select :toilet_eq, ["優先トイレあり", "あり"], { include_blank: "選択してください" }, class: "form-select" %>
+  </div>
+  <div class="mb-3 col-md-6 col-lg-11">
+    <span class="fw-bold">自動販売機は？</span>
+    <%= f.select :vendingmachine_eq, ["あり"], { include_blank: "選択してください" }, class: "form-select" %>
+  </div>
+  <%= f.label :name_or_adderss_or_description, "キーワード検索" %>
+  <%= f.search_field :name_or_address_or_description_cont, class: 'form-control', placeholder: '検索ワード' %>
+  <%= f.submit "検索", class: 'btn btn-warning' %>
+<% end %>
+</div>
+<%# end %>
+
+<%# if false %>
+<table>
+  <tr>
+    <th><%= sort_link(@search, :name) %></th>
+    <th><%= sort_link(@search, :created_at) %></th>
+    <th><%= sort_link(@search, :updated_at) %></th>
+    <th><%= sort_link(@search, :favorite_count) %></th>
+  </tr>
+
+  <% @places.each do |place| %>
+    <tr>
+      <td><%= place.name %></td>
+    </tr>
+  <% end %>
+</table>
+<%# end %>
+
 <div class="my-3 row justify-content-sm-center">
   <div class="searchFormArea col-xs-10 col-md-11 col-lg-4 col-xxl-3 mb-2 mb-lg-0">
     <h4 class="">おでかけ場所を探そう</h4>
@@ -25,7 +64,7 @@
               <span class="fw-bold">キーワード検索</span>
               <div class="d-flex">
                 <%= f.text_field :keyword, class:"form-control", placeholder: 'キーワードを入力'%>
-                <%= f.submit "検索", class:"btn btn-secondary ms-1" %>
+                <%= f.submit "検索", class:"btn btn-warning ms-1" %>
               </div>
             </div>
           </div>
@@ -41,12 +80,12 @@
   <div class="container">
     <%= turbo_frame_tag "place-list" do %>
       <div class="d-flex justify-content-between align-items-center">
-        <h2>おでかけ場所　<%= @places.total_count%>件</h2>
+        <h2>おでかけ場所　<%= @places.total_count %>件</h2>
         <div class="sortBox fw-medium">
-          <%= link_to '作成が新しい順  |  ', places_path(latest: "true"), class: "text-warning-emphasis" %>
-          <%= link_to '作成が古い順  |  ', places_path(old: "true"), class: "text-warning-emphasis" %>
-          <%= link_to '更新が新しい順  |  ', places_path(latest_update: "true"), class: "text-warning-emphasis" %>
-          <%= link_to 'いいね順', places_path(star_count: "true"), class: "text-warning-emphasis" %>
+          <%= link_to '作成が新しい順  |  ', places_path(@places, latest: "true"), class: "text-warning-emphasis" %>
+          <%= link_to '作成が古い順  |  ', places_path(@places, old: "true"), class: "text-warning-emphasis" %>
+          <%= link_to '更新が新しい順  |  ', places_path(@places,latest_update: "true"), class: "text-warning-emphasis" %>
+          <%= link_to 'いいね順', places_path(@places, favorite_count: "true"), class: "text-warning-emphasis" %>
         </div>
       </div>
       <div class="row row-cols-1 row-cols-lg-2 row-cols-xl-3 g-4 p-4">

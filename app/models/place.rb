@@ -25,8 +25,19 @@ class Place < ApplicationRecord
   scope :latest, -> {order(created_at: :desc)}
   scope :old, -> {order(created_at: :asc)}
   scope :latest_update, -> {order(updated_at: :desc)}
-  scope :favorite_count, -> {order(favorites: :desc)}
+  scope :favorite_count, -> {order(favorites.size :desc)}
 
+  def self.ransackable_attributes(auth_object = nil)
+    ["address", "created_at", "description", "id", "name", "toilet", "updated_at", "user_id", "vendingmachine", "schoolgrade_id"]
+  end
+
+  def self.ransackable_associations(auth_object = nil)
+    ["favorites", "schoolgrades", "targets", "user"]
+  end
+
+  def self.ransackable_scopes(auth_object = nil)
+    %i(favorite_count)
+  end
 
   def self.handover_to_js
     Place.pluck(:id, :latitude, :longitude)
