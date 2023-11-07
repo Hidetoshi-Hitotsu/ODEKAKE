@@ -40,10 +40,4 @@ RSpec.describe Place, type: :model do
     places_to_js = Place.handover_to_js
     expect(places_to_js).to eq places.pluck(:id, :latitude, :longitude)
   end
-
-  it "is able to search about name, address, description and schoolgrades" do
-    expect(Place.search("My", "", "", "").count).to eq 4
-    expect(Place.search("", "", "あり", "").count).to eq 4
-    expect(Place.search("", "", "", "なし").count).to eq 0
-  end
 end

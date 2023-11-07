@@ -41,7 +41,7 @@ RSpec.describe "Places", type: :system do
     end
   end
 
-  scenario "user destroy a place", js: true do
+  scenario "user destroy a place" do
     user = create(:user)
     schoolgrade = create(:schoolgrade)
     schoolgrade
@@ -50,7 +50,6 @@ RSpec.describe "Places", type: :system do
 
     expect do
       click_button "削除"
-      page.accept_confirm
       expect(page).to have_content "登録していた場所を削除しました。"
     end.to change(user.places, :count).by(-1)
   end

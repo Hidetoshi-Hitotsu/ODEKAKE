@@ -22,82 +22,32 @@ class Place < ApplicationRecord
   belongs_to :user
   mount_uploader :image, ImageUploader
   validates_presence_of  :name, :address, :schoolgrades, :description, :latitude, :longitude
-  scope :latest, -> {order(created_at: :desc)}
-  scope :old, -> {order(created_at: :asc)}
-  scope :latest_update, -> {order(updated_at: :desc)}
-  scope :favorite_count, -> {order(favorites.size :desc)}
 
   def self.ransackable_attributes(auth_object = nil)
-    ["address", "created_at", "description", "id", "name", "toilet", "updated_at", "user_id", "vendingmachine", "schoolgrade_id"]
+    ["address", "created_at", "description", "name", "toilet", "updated_at", "vendingmachine", "schoolgrade_id"]
   end
 
   def self.ransackable_associations(auth_object = nil)
     ["favorites", "schoolgrades", "targets", "user"]
   end
 
-  def self.ransackable_scopes(auth_object = nil)
-    %i(favorite_count)
-  end
-
   def self.handover_to_js
     Place.pluck(:id, :latitude, :longitude)
-  end
-
-  def self.search(search, schoolgrade_id, toilet, vendingmachine)
-    if toilet != "" && vendingmachine != ""
-      if schoolgrade_id != "" && search != ""
-        Schoolgrade.find(schoolgrade_id).places.
-          where(['name LIKE (?) OR address LIKE (?) OR description LIKE (?)', "%#{search}%", "%#{search}%", "%#{search}%"]).
-          where(toilet: toilet, vendingmachine: vendingmachine)
-      elsif schoolgrade_id != "" && search == ""
-        Schoolgrade.find(schoolgrade_id).places.where(toilet: toilet, vendingmachine: vendingmachine)
-      elsif schoolgrade_id == "" && search != ""
-        Place.where(['name LIKE (?) OR address LIKE (?) OR description LIKE (?)', "%#{search}%", "%#{search}%", "%#{search}%"]).
-          where(toilet: toilet, vendingmachine: vendingmachine)
-      else
-        where(toilet: toilet, vendingmachine: vendingmachine)
-      end
-    elsif toilet == "" && vendingmachine != ""
-      if schoolgrade_id != "" && search != ""
-        Schoolgrade.find(schoolgrade_id).places.
-          where(['name LIKE (?) OR address LIKE (?) OR description LIKE (?)', "%#{search}%", "%#{search}%", "%#{search}%"]).
-          where(vendingmachine: vendingmachine)
-      elsif schoolgrade_id != "" && search == ""
-        Schoolgrade.find(schoolgrade_id).places.where(vendingmachine: vendingmachine)
-      elsif schoolgrade_id == "" && search != ""
-        Place.where(['name LIKE (?) OR address LIKE (?) OR description LIKE (?)', "%#{search}%", "%#{search}%", "%#{search}%"]).
-          where(vendingmachine: vendingmachine)
-      else
-        where(vendingmachine: vendingmachine)
-      end
-    elsif toilet != "" && vendingmachine == ""
-      if schoolgrade_id != "" && search != ""
-        Schoolgrade.find(schoolgrade_id).places.
-          where(['name LIKE (?) OR address LIKE (?) OR description LIKE (?)', "%#{search}%", "%#{search}%", "%#{search}%"]).
-          where(toilet: toilet)
-      elsif schoolgrade_id != "" && search == ""
-        Schoolgrade.find(schoolgrade_id).places.where(toilet: toilet)
-      elsif schoolgrade_id == "" && search != ""
-        Place.where(['name LIKE (?) OR address LIKE (?) OR description LIKE (?)', "%#{search}%", "%#{search}%", "%#{search}%"]).
-          where(toilet: toilet)
-      else
-        where(toilet: toilet)
-      end
-    else
-      if schoolgrade_id != "" && search != ""
-        Schoolgrade.find(schoolgrade_id).places.
-          where(['name LIKE (?) OR address LIKE (?) OR description LIKE (?)', "%#{search}%", "%#{search}%", "%#{search}%"])
-      elsif schoolgrade_id != "" && search == ""
-        Schoolgrade.find(schoolgrade_id).places
-      elsif schoolgrade_id == "" && search != ""
-        Place.where(['name LIKE (?) OR address LIKE (?) OR description LIKE (?)', "%#{search}%", "%#{search}%", "%#{search}%"])
-      else
-        Place.all
-      end
-    end
   end
 
   def already_favorite?(user_id)
     favorites.pluck(:user_id).include?(user_id)
   end
+
+  ransacker :favorite_count do
+    query = <<-SQL
+      (
+        SELECT COUNT(favorites.id)
+        FROM favorites
+        WHERE favorites.place_id = places.id
+      )
+    SQL
+    Arel.sql(query)
+  end
+
 end
