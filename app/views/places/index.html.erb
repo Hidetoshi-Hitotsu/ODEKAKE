@@ -15,11 +15,11 @@
             </div>
             <div class="mb-3 col-md-6 col-lg-11">
               <span class="fw-bold">トイレは？</span>
-              <%= f.select :toilet, ["優先トイレあり", "あり"], { include_blank: "選択してください" }, class: "form-select" %>
+              <%= f.select :toilet_eq, ["優先トイレあり", "あり"], { include_blank: "選択してください" }, class: "form-select" %>
             </div>
             <div class="mb-3 col-md-6 col-lg-11">
               <span class="fw-bold">自動販売機は？</span>
-              <%= f.select :vendingmachine, ["あり"], { include_blank: "選択してください" }, class: "form-select" %>
+              <%= f.select :vendingmachine_eq, ["あり"], { include_blank: "選択してください" }, class: "form-select" %>
             </div>
             <div class="col-md-6 col-lg-11">
               <span class="fw-bold">キーワード検索</span>

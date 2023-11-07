@@ -7,7 +7,7 @@ module CreateNewPlace
     check "place[schoolgrade_ids][]"
     fill_in "lat", with: "35"
     fill_in "lng", with: "135"
-    find('#hidden', visible: false).set(user.id)
+    # find('#hidden', visible: false).set(user.id)
     click_button "登録"
   end
 end

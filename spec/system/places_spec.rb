@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe "Places", type: :system do
-  scenario "user creates a new place" do
+  scenario "user creates a new place", js: true do
     user = create(:user)
     schoolgrade = create(:schoolgrade)
     schoolgrade
@@ -13,9 +13,10 @@ RSpec.describe "Places", type: :system do
       fill_in "add", with: "TestAddres"
       fill_in "description", with: "TestDescription"
       check "Grade"
+      page.execute_script("$('#lat').removeAttr('readonly')")
+      page.execute_script("$('#lng').removeAttr('readonly')")
       fill_in "lat", with: "35"
       fill_in "lng", with: "135"
-      find('#hidden', visible: false).set(user.id)
       click_button "登録"
 
       expect(page).to have_content "場所の登録が完了しました。"
@@ -34,7 +35,6 @@ RSpec.describe "Places", type: :system do
     expect do
       click_link "編集"
       fill_in "searchName", with: "EditName"
-      find('#hidden', visible: false).set(user.id)
       click_button "登録"
       expect(page).to have_content "登録している場所の更新が完了しました。"
       expect(page).to have_content "EditName"
