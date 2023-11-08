@@ -6,7 +6,13 @@ class PlacesController < ApplicationController
   def index
     @search = Place.ransack(params[:q])
     @places_to_js = @search.result.includes([:schoolgrades, :favorites])
-    @places = @places_to_js.page(params[:page])
+    if params[:q] && params[:q][:s] == 'favorite_count desc'
+      @places = @places_to_js.sort_by_favorite_count('desc').page(params[:page])
+    elsif params[:q] && params[:q][:s] == 'favorite_count asc'
+      @places = @places_to_js.sort_by_favorite_count('asc').page(params[:page])
+    else
+      @places = @places_to_js.page(params[:page])
+    end
     gon.places = @places_to_js.handover_to_js
   end
 

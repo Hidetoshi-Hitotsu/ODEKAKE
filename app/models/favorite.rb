@@ -22,4 +22,12 @@ class Favorite < ApplicationRecord
   belongs_to :user
   belongs_to :place
   validates :place_id, uniqueness: { scope: :user_id }
+
+  def self.ransackable_associations(auth_object = nil)
+    ["places"]
+  end
+
+  def self.ransackable_attributes(auth_object = nil)
+    ["id", "place_id"]
+  end
 end
