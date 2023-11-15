@@ -1,6 +1,6 @@
 # ODEKAKE
 
-## URL
+### URL
 https://odekake-nyav.onrender.com/<br>
 画面上部のゲストログインボタンから、メールアドレスとパスワードを入力せずにログインできます。
 
@@ -8,11 +8,6 @@ https://odekake-nyav.onrender.com/<br>
 現在２児の父として子育て中ですが、子どもを連れてお出かけする際、せっかく訪れても年齢に見合う遊具がなくて残念な思いをしたり、トイレがなくて右往左往した経験が多数あります。<br>
 事前情報として、どのような対象年齢の子向けか、トイレなどはあるのかがわかるものがほしいということで、今回のサービスを作りました。<br>
 地図では好きな地点にマーカーを置けるので、施設だけでなく、ちょっとした子ども向けの遊びスポットも登録できるようにしています。
-
-## 想定されるユーザ
-　お子様連れ家庭の保護者 20代〜30代
-
-
 
 # 使用技術
 * Ruby 3.2.2
@@ -24,7 +19,8 @@ https://odekake-nyav.onrender.com/<br>
 * Render.com
 
 # ER図
-<img width="900" alt="ER図" src="https://github.com/Hidetoshi-Hitotsu/ODEKAKE/app/assets/images/erd.png">
+![erd](https://github.com/Hidetoshi-Hitotsu/ODEKAKE/assets/130296714/43a9c31f-9a17-4bb8-b791-444d02e0aeea)
+
 
 # アプリについて
 お子様づれの方を想定したお出かけ場所の投稿・検索サイトです。<br>
